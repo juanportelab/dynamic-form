@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import './DynamicForm.css';
+import FirstStep from './FirstStep/FirstStep';
+import SecondStep from './SecondStep/SecondStep';
+import ThirdStep from "./ThirdStep/ThirdStep";
 
 export default function DynamicForm() {
 
@@ -19,18 +22,24 @@ export default function DynamicForm() {
                 <div className="content-dynamic-form mt-5 p-4">
                     <h2 className="title-dynamic-form">Fill the form</h2>
                     <p className="steps-numbers">Step {step} of 3</p>
+                    
+                    {getPageByStep(step, setStep)}
 
                     <div className="actions">
                         <div className="container-text">
-                            <p className="before" onClick={showPreviewStep}>
-                                Before step
-                            </p>
+                            {step > 1 && step < 4 && (
+                                <p className="before" onClick={showPreviewStep}>
+                                    ◀️ Before step
+                                </p>
+                            )}                            
                         </div>
 
                         <div className="container-text">
+                        {step > 0 && step < 3 && (
                             <p className="next" onClick={showNextStep}>
-                                Next step
+                                Next step ▶️
                             </p>
+                        )}
                         </div>
                     </div>
                 </div>
@@ -38,3 +47,15 @@ export default function DynamicForm() {
         </div>
     )
 };
+
+function getPageByStep(step, setStep) {
+    if ( step === 1){
+        return <FirstStep></FirstStep>
+    }
+    else if (step === 2){
+        return <SecondStep></SecondStep>
+    }
+    else if (step === 3){
+        return <ThirdStep></ThirdStep>
+    }
+}
