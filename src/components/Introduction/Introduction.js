@@ -22,7 +22,7 @@ export default function Introduction() {
                   <Button className="p-3">Get in touch</Button>
                 </div>
                 <div className="btn-start-create">
-                  <a href="#dynamic-form">Start to create → ▶️ ▶</a>
+                  <a href="#dynamic-form">Start to create ▶️</a>
                 </div>
               </div>
             </Col>
