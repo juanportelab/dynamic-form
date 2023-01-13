@@ -1,7 +1,17 @@
-import { Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
-import './ThirdStep.css';
+import {useState} from 'react';
+import { Col, Container, FloatingLabel, Form, Modal, Row } from "react-bootstrap";
+import "./ThirdStep.css";
+import Resume from "../Resume/Resume";
 
-export default function ThirdStep() {
+export default function ThirdStep({setStep}) {
+
+  const [modal, setModal] = useState(false);
+
+  const onChangeComment = (e) => {
+    const comment = e.target.value;
+    localStorage.setItem('comment', comment);
+  }
+
   return (
     <div>
       <h2>Third step</h2>
@@ -16,16 +26,19 @@ export default function ThirdStep() {
                 <Form.Control 
                   as="textarea" 
                   placeholder="Leave a comment" 
-                  onChange={(e) => console.log(e.target.value)}>
+                  onChange={(e) => onChangeComment(e)}>
                 </Form.Control>
             </FloatingLabel>
           </Col>
         </Row>
         <div className="send-form">
-          <p className="result p-3" onClick={() => console.log("View result")}>
+          <p className="result p-3" onClick={() => setModal(true)}>
             View result 🤲🏻
           </p>
         </div>
+        {modal && (
+          <Resume showModal={modal} setModal={setModal} setStep={setStep}></Resume>
+        )}
       </Container>
     </div>
   )
